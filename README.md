@@ -1,10 +1,13 @@
-# Grok Bot for Datadog GTM
+# América Móvil x SpaceXAI
 
-Passworded site. Grok Bot from SpaceXAI, for Datadog GTM.
+Passworded América Móvil GTM concept site for Grok Bot from SpaceXAI.
 
 ## What it is
 
-Three GTM jobs on one page. Each job has a short problem statement, an interactive Grok Bot demo, and the matching Krista Letz clips under that demo. Below that: a light index of the clips and the public Grok Bot quote wall.
+Three illustrative GTM workflows on one page. Each chapter has three
+scene-in-time beats, a final draft artifact, and an interactive Grok Bot
+chat with the bot computer beside it. The site also includes the agent fleet,
+a comparison, and six linked public quotes.
 
 ## Run locally
 
@@ -14,18 +17,25 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Default password is `land2expand` (override with `SITE_PASSWORD`).
+Open [http://localhost:3000](http://localhost:3000). Configure
+`SITE_PASSWORD` from `.env.example`.
 
-## Krista clips
+## Project identity
 
-Download into `private/media/krista-clips/` from the GitHub release (served only through the passworded `/api/media/...` route):
+- Customer slug: `america-movil`
+- Project: `america-movil-gtm`
 
-```bash
-gh release download krista-gtm-clips-720p-2026-08-26 \
-  --repo Speediing/grok-bot-quotes \
-  --dir private/media/krista-clips
-```
+Private clip arrays are intentionally empty. The JobMore chat and computer
+playback remain available without private media.
+
+## Brand provenance
+
+- [América Móvil press room](https://www.americamovil.com/English/press-room/default.aspx)
+- [Official América Móvil logo source](https://s22.q4cdn.com/604986553/files/design/americamovil-logo.png)
+
+The lockup loads the official wordmark from the América Móvil CDN. The custom
+watercolor is stored at `/brand/america-movil-watercolor.jpg`.
 
 ## Deploy
 
-Preview only under the `jasonwiker` Vercel team, project name `datadog-cro`. Set `SITE_PASSWORD=land2expand`. Do not promote to a public production domain until Jason says so.
+Deploy as the `america-movil-gtm` project with `SITE_PASSWORD` configured.

@@ -13,7 +13,7 @@ const ROWS: { label: string; values: string[] }[] = [
   {
     label: "What starts it",
     values: [
-      "Always on — it starts without a prompt",
+      "Always on. It can start without a prompt",
       "You assign a task",
       "You start a chat or task",
       "You ask a question",

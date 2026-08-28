@@ -1,12 +1,13 @@
 {
-  "name": "datadog-cro",
+  "name": "america-movil-gtm",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "verify": "node scripts/verify.mjs"
   },
   "dependencies": {
     "geist": "^1.7.2",

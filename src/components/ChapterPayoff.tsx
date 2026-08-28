@@ -11,7 +11,7 @@ function OutboundPack({
 
   return (
     <div className="leave leave-out-phone">
-      <div className="out-phone" aria-label="Sales Outbound approval chat">
+      <div className="out-phone" aria-label="Scout approval chat">
         <div className="out-phone-notch" aria-hidden />
         <header className="out-phone-header">
           <span className="out-phone-back" aria-hidden>
@@ -21,7 +21,7 @@ function OutboundPack({
             ✦
           </span>
           <p>
-            <strong>Sales Outbound</strong>
+            <strong>Scout</strong>
             <small>{artifact.account} · drafts ready</small>
           </p>
           <span className="out-phone-desktop" aria-hidden>
@@ -31,39 +31,35 @@ function OutboundPack({
 
         <div className="out-phone-thread">
           <article className="out-email-card">
-            <p className="out-email-label">Draft email · 1 of 10</p>
+            <p className="out-email-label">
+              Illustrative email draft · not sent
+            </p>
             <p className="out-email-subject">
-              Subject · {artifact.account}&apos;s last Sev-2
+              Subject · A short working-session idea
             </p>
             <div className="out-email-copy">
               <p>Hi {firstName},</p>
-              <p>
-                Your status page and open Staff SRE role point to the same
-                thing: on-call still stitches APM and logs to name a Sev-2.
-              </p>
-              <p>
-                I put together the 90-second version for your platform team.
-                Worth fifteen minutes next week?
-              </p>
-              <p>Sam</p>
+              <p>{artifact.hypothesis[0]?.body}</p>
+              <p>Would a short review be useful?</p>
+              <p>Seller</p>
             </div>
             <footer>
-              <span>Send email</span>
+              <span>Review draft</span>
               <span>Discard</span>
             </footer>
           </article>
 
           <p className="out-message is-you">
-            Send the top 10 emails. They look good.
+            Keep the drafts queued for review.
           </p>
           <p className="out-message is-bot">
-            Top 10 sending. The rest stay queued.
+            All drafts remain unsent.
           </p>
         </div>
 
         <footer className="out-phone-composer">
           <span aria-hidden>+</span>
-          <p>Message Sales Outbound</p>
+          <p>Message Scout</p>
           <span aria-hidden>◉</span>
         </footer>
       </div>
@@ -82,7 +78,7 @@ function UpstairsMemo({
         <div>
           <p className="leave-kicker">{artifact.title}</p>
           <h3>
-            {artifact.account || "Acme"}
+            {artifact.account || "Sample account"}
             {artifact.amount ? ` · ${artifact.amount}` : ""}
           </h3>
         </div>
@@ -111,7 +107,7 @@ function FieldPack({
   return (
     <div className="leave leave-pack">
       <header className="leave-pack-top">
-        <p className="leave-kicker">Friday field pack</p>
+        <p className="leave-kicker">Illustrative field pack</p>
         <h3>{artifact.title}</h3>
       </header>
       <ol className="leave-cards">
@@ -135,8 +131,8 @@ function BetterAnswer({
     <div className="leave leave-answer">
       <header className="leave-answer-top">
         <div>
-          <p className="leave-kicker">Open source objection</p>
-          <h3>The line that wins</h3>
+          <p className="leave-kicker">Illustrative practice</p>
+          <h3>A clearer answer</h3>
         </div>
         <p className="leave-score">{artifact.score}</p>
       </header>
@@ -156,10 +152,10 @@ function BetterAnswer({
           <p className="leave-kicker">Say this</p>
           <p className="leave-win">{artifact.betterAnswer}</p>
           <p className="leave-incident" aria-hidden>
-            <span>Prometheus</span>
-            <span>Grafana</span>
-            <span>Log pile</span>
-            <b>APM + Logs</b>
+            <span>Public source</span>
+            <span>Approved docs</span>
+            <span>Seller review</span>
+            <b>Draft only</b>
           </p>
         </section>
       </div>
@@ -176,7 +172,7 @@ function RedlinePack({
     <div className="leave leave-paper">
       <header className="leave-paper-top">
         <div>
-          <p className="leave-kicker">No internal chase</p>
+          <p className="leave-kicker">Sources checked</p>
           <h3>{artifact.title}</h3>
         </div>
         <p className="leave-paper-from">{artifact.from}</p>
@@ -194,6 +190,16 @@ function RedlinePack({
               </li>
             ))}
           </ol>
+          <p className="leave-kicker">Sources</p>
+          <ul className="leave-sources">
+            {artifact.sources.map((source) => (
+              <li key={source.url}>
+                <a href={source.url} target="_blank" rel="noreferrer">
+                  {source.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </section>
         <section className="leave-reply">
           <p className="leave-kicker">Draft reply · not sent</p>

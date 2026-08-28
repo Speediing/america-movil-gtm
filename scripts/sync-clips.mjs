@@ -1,8 +1,8 @@
 import { cpSync, existsSync, mkdirSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 
-const src = "private/media/krista-clips";
-const dest = "public/media/krista-clips";
+const src = "private/media/job-clips";
+const dest = "public/media/job-clips";
 
 if (!existsSync(src)) {
   process.exit(0);

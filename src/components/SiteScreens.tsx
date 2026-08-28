@@ -1,7 +1,7 @@
 import type { Artifact, DemoMessage, SlideCard } from "@/data/types";
 import type { ComputerBeat } from "@/data/screens";
 import { CLIPS } from "@/data/clips";
-import { ACME_TAIL_SLIDES } from "@/data/jobs";
+import { WORKING_SESSION_SLIDES } from "@/data/jobs";
 import { HeardSlide } from "./HeardSlide";
 
 function asSlides(artifact?: Artifact) {
@@ -135,26 +135,19 @@ function GranolaScreen({ account }: { account: string }) {
       <p className="site-time">Still on the call · Granola in</p>
       <ul>
         <li>
-          <span>14:12</span> Start with APM + Logs in one team. Not a product
-          tour.
+          <span>Live</span> {account} sample session started. Illustrative only.
         </li>
         <li>
-          <span>14:18</span> Security: SSO and an audit trail before any extra
-          products.
+          <span>Note</span> Capture only buyer-stated priorities.
         </li>
         <li>
-          <span>14:21</span> Soft yes on a Bits AI trial if those two are named.
+          <span>Note</span> Confirm role owners before adding them.
         </li>
         <li>
-          <span>14:24</span> Cost mentioned once. RUM not in the room.
+          <span>Draft</span> Prepare a short working path.
         </li>
         <li>
-          <span>14:28</span> Your contact will take a Tuesday with a security
-          co-owner.
-        </li>
-        <li>
-          <span>14:31</span> Use cases named live on the demo. Sev-2 story,
-          one team, SSO as the gate.
+          <span>Review</span> Keep every output unsent for the seller.
         </li>
       </ul>
     </div>
@@ -171,7 +164,7 @@ function FigmaScreen({
   const slides = asSlides(artifact);
   const packet = artifact?.kind === "packet" ? artifact : null;
   const pager = asOnePager(artifact);
-  const cards: SlideCard[] = slides?.cards ?? ACME_TAIL_SLIDES;
+  const cards: SlideCard[] = slides?.cards ?? WORKING_SESSION_SLIDES;
 
   return (
     <div className="site site-figma">
@@ -184,7 +177,7 @@ function FigmaScreen({
               ? `${account} one-pager`
               : packet
                 ? `${account} inside note`
-                : `${account} North Star`}
+                : `${account} working draft`}
         </strong>
         <em>Draft</em>
       </header>
@@ -220,17 +213,15 @@ function GongScreen({ account }: { account: string }) {
     <div className="site site-gong">
       <header>
         <strong>Gong</strong>
-        <span>
-          {account} · first meeting · 32 min
-        </span>
+        <span>{account} · illustrative sample</span>
       </header>
       <div className="gong-recap">
-        <h4>Call recap</h4>
+        <h4>Illustrative call recap</h4>
         <ul>
-          <li>They have APM + Logs</li>
-          <li>Security lead in the room</li>
-          <li>Cost mentioned once</li>
-          <li>No one who can sign was on the call</li>
+          <li>Sample priority needs seller review</li>
+          <li>Role owner is not confirmed</li>
+          <li>Next-step date is a placeholder</li>
+          <li>Nothing was sent</li>
         </ul>
       </div>
     </div>
@@ -251,51 +242,46 @@ function SfdcAccountScreen({ account }: { account: string }) {
       </div>
       <dl className="sfdc-fields">
         <div>
-          <dt>Has now</dt>
-          <dd>APM + Logs</dd>
+          <dt>Workflow</dt>
+          <dd>Illustrative sample</dd>
         </div>
         <div>
-          <dt>Security lead</dt>
-          <dd>In first meeting</dd>
-        </div>
-        <div>
-          <dt>Cost</dt>
-          <dd>Mentioned once</dd>
-        </div>
-        <div>
-          <dt>Who can sign</dt>
+          <dt>Buyer role</dt>
           <dd>Not confirmed</dd>
+        </div>
+        <div>
+          <dt>Public source</dt>
+          <dd>Needed</dd>
+        </div>
+        <div>
+          <dt>Draft status</dt>
+          <dd>Not sent</dd>
         </div>
       </dl>
       <table className="sfdc-related">
-        <caption>Next 90 days</caption>
+        <caption>Sample review queue</caption>
         <thead>
           <tr>
-            <th>Product</th>
+            <th>Item</th>
             <th>Owner</th>
-            <th>Window</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Bits AI</td>
-            <td>Platform eng manager</td>
-            <td>Day 15 to 45</td>
+            <td>Working hypothesis</td>
+            <td>Seller</td>
+            <td>Needs review</td>
           </tr>
           <tr>
-            <td>Cloud SIEM</td>
-            <td>Security lead</td>
-            <td>Day 15 to 45</td>
+            <td>Public sources</td>
+            <td>Scout</td>
+            <td>Needs links</td>
           </tr>
           <tr>
-            <td>Cost</td>
-            <td>FinOps alias</td>
-            <td>Day 45 to 90</td>
-          </tr>
-          <tr>
-            <td>RUM</td>
-            <td>Frontend guild</td>
-            <td>Day 45 to 90</td>
+            <td>Outreach</td>
+            <td>Seller</td>
+            <td>Not sent</td>
           </tr>
         </tbody>
       </table>
@@ -320,29 +306,29 @@ function SfdcOppScreen({
       <div className="sfdc-title">
         <p>Opportunity</p>
         <h3>
-          {account} · $1.4M
+          {account} · illustrative sample
         </h3>
       </div>
       <dl className="sfdc-fields">
         <div>
           <dt>Stage</dt>
-          <dd>4 · this quarter</dd>
+          <dd>Not set</dd>
         </div>
         <div className={highlight ? "gap" : undefined}>
-          <dt>Signer meeting</dt>
-          <dd>None on calendar</dd>
+          <dt>Role owner</dt>
+          <dd>Not confirmed</dd>
         </div>
         <div className={highlight ? "gap" : undefined}>
-          <dt>Legal</dt>
-          <dd>Slow · no dated path</dd>
+          <dt>Public source</dt>
+          <dd>Needs review</dd>
         </div>
         <div className={highlight ? "gap" : undefined}>
-          <dt>Inside contact</dt>
-          <dd>Likes us · weak map</dd>
+          <dt>Contact</dt>
+          <dd>Sample placeholder</dd>
         </div>
         <div className={highlight ? "gap" : undefined}>
-          <dt>Cloud SIEM</dt>
-          <dd>Not in the story</dd>
+          <dt>Draft</dt>
+          <dd>Not sent</dd>
         </div>
       </dl>
     </div>
@@ -360,22 +346,20 @@ function SheetsScreen({
   const rows = table
     ? table.rows
     : [
-        [account, "Inside contact", "Signer TBD", "APM + Logs", "Tue SIEM"],
-        ["Globex", "VP Eng", "CISO", "APM + Logs", "First meeting"],
-        ["Initech", "SRE lead", "CTO", "APM + Logs", "Bits AI"],
-        ["Umbrella", "Sec eng", "CISO", "APM + Logs", "Open source drill"],
-        ["Hooli", "Platform", "Signer TBD", "APM + Logs", "Cost later"],
+        [account, "Sample contact", "Unconfirmed", "Needs source", "Draft"],
+        ["Sample account 2", "Role unknown", "Unconfirmed", "Needs source", "Draft"],
+        ["Sample account 3", "Role unknown", "Unconfirmed", "Needs source", "Draft"],
       ];
   const cols = table
     ? table.columns
-    : ["Account", "Inside contact", "Who can sign", "Start with", "Next"];
+    : ["Account", "Contact", "Owner", "Source", "Status"];
 
   return (
     <div className="site site-sheets">
       <header>
         <span className="sheets-mark">Sheets</span>
         <strong>
-          {table ? `${account} next 90 days` : "5 accounts x 5 prospects"}
+          {table ? `${account} illustrative table` : "Illustrative account sheet"}
         </strong>
       </header>
       <table>
@@ -421,7 +405,7 @@ function GmailScreen({
       </p>
       <p>
         <span>Subject</span>
-        {artifact?.subject || `${account} / Datadog`}
+        {artifact?.subject || `${account} / illustrative draft`}
       </p>
       <div>{artifact?.body || "Draft parked here until you tap Send?"}</div>
     </div>
@@ -472,7 +456,7 @@ function GdocScreen({
           {forecast
             ? `${account} forecast`
             : talks
-              ? "Bits AI talk tracks"
+              ? "Illustrative talk tracks"
               : packet
                 ? packet.title
                 : onePager?.title || `${account} brief`}
@@ -515,25 +499,21 @@ function ResearchScreen({ account }: { account: string }) {
     <div className="site site-research">
       <header>
         <strong>{account}.com</strong>
-        <span>Public · last 30 days</span>
+        <span>Public research sample</span>
       </header>
       <p className="site-time">Researching the account · not a sequence</p>
       <ul>
         <li>
-          <span>Status</span> Sev-2, 14 days ago. 47 minutes to name the failing
-          service. Postmortem still says they jumped three tools.
+          <span>Website</span> Illustrative placeholder. Add a linked fact.
         </li>
         <li>
-          <span>Careers</span> Staff SRE JD: experience stitching APM and logs
-          across teams. Posted this month.
+          <span>Press</span> Illustrative placeholder. No claim is assumed.
         </li>
         <li>
-          <span>Blog</span> We outgrew homegrown dashboards. No named
-          replacement.
+          <span>Profile</span> Confirm the role before outreach.
         </li>
         <li>
-          <span>Org</span> VP Eng owns time-to-fix. Platform director sits on
-          that stitch.
+          <span>Review</span> Draft only. Nothing sent.
         </li>
       </ul>
     </div>
@@ -557,7 +537,7 @@ function LinkedInScreen({
       </header>
       <p>
         <span>To</span>
-        {artifact?.to || `${account} VP Eng`}
+        {artifact?.to || `${account} sample contact`}
         {artifact?.role ? ` · ${artifact.role}` : ""}
       </p>
       <div>{artifact?.body || "InMail parked here until you tap Send."}</div>

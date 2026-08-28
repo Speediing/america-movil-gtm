@@ -3,10 +3,8 @@ import { HeardSlide } from "./HeardSlide";
 
 export function ArtifactCard({ artifact }: { artifact: Artifact }) {
   switch (artifact.kind) {
-      case "slides":
-      return (
-        <HeardSlide slides={artifact.cards} size="sm" />
-      );
+    case "slides":
+      return <HeardSlide slides={artifact.cards} size="sm" />;
     case "one-pager":
       return (
         <div className="art art-doc">
@@ -23,7 +21,7 @@ export function ArtifactCard({ artifact }: { artifact: Artifact }) {
     case "packet":
       return (
         <div className="art art-doc">
-          <p className="art-kicker">Champion packet</p>
+          <p className="art-kicker">Internal draft packet</p>
           <h3 className="art-title">{artifact.title}</h3>
           {artifact.fields.map((field) => (
             <div key={field.label} className="art-block">
@@ -174,6 +172,16 @@ export function ArtifactCard({ artifact }: { artifact: Artifact }) {
               <li key={mark.text}>
                 <p className="art-label">{mark.take ? "Answer" : "Hold"}</p>
                 <p>{mark.note}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="art-label">Sources</p>
+          <ul>
+            {artifact.sources.map((source) => (
+              <li key={source.url}>
+                <a href={source.url} target="_blank" rel="noreferrer">
+                  {source.label}
+                </a>
               </li>
             ))}
           </ul>

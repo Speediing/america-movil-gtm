@@ -144,17 +144,17 @@ function LiveVisual({ visual }: { visual: StoryVisual }) {
           </footer>
         </div>
       );
-    case "live-transcript":
+    case "live-note":
       return (
         <div className="story-ui story-transcript-ui" aria-hidden>
           <header className="story-ui-bar">
-            <strong>Live transcript</strong>
+            <strong>Live note</strong>
             <span>{visual.timestamp}</span>
           </header>
-          <blockquote>
-            <strong>{visual.speaker}</strong>
-            “{visual.quote}”
-          </blockquote>
+          <div className="story-note">
+            <strong>{visual.label}</strong>
+            <p>{visual.note}</p>
+          </div>
           <footer>
             {visual.signals.map((signal) => (
               <span key={signal}>{signal}</span>
@@ -191,10 +191,7 @@ function LiveVisual({ visual }: { visual: StoryVisual }) {
               <small>{visual.subject}</small>
             </p>
           </div>
-          <footer>
-            <strong>{visual.questions}</strong>
-            questions need answers
-          </footer>
+          <footer>{visual.status}</footer>
         </div>
       );
     case "answers-found":

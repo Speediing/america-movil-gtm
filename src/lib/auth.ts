@@ -1,7 +1,11 @@
-export const AUTH_COOKIE = "datadog_cro_session";
+export const AUTH_COOKIE = "america_movil_gtm_session";
 
 export function sitePassword(): string {
-  return process.env.SITE_PASSWORD || "land2expand";
+  const password = process.env.SITE_PASSWORD;
+  if (!password) {
+    throw new Error("SITE_PASSWORD must be configured");
+  }
+  return password;
 }
 
 function toHex(buffer: ArrayBuffer): string {
@@ -13,7 +17,7 @@ function toHex(buffer: ArrayBuffer): string {
 export async function sessionToken(
   password: string = sitePassword(),
 ): Promise<string> {
-  const data = new TextEncoder().encode(`datadog-cro:${password}`);
+  const data = new TextEncoder().encode(`america-movil-gtm:${password}`);
   const digest = await crypto.subtle.digest("SHA-256", data);
   return toHex(digest);
 }

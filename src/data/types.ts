@@ -1,12 +1,7 @@
 export type ClipId =
   | "01-morning-inbox"
   | "02-prospecting-pg"
-  | "03-slides-granola"
-  | "04-engineer-bugbot"
-  | "05-forecast-sfdc"
-  | "06-customer-expert"
-  | "07-customer-exec-brief"
-  | "08-chief-groupchat";
+  | "03-slides-granola";
 
 export type JobId =
   | "standardize-room"
@@ -54,10 +49,10 @@ export type StoryVisual =
       people: { initials: string; name: string }[];
     }
   | {
-      kind: "live-transcript";
+      kind: "live-note";
       timestamp: string;
-      speaker: string;
-      quote: string;
+      label: string;
+      note: string;
       signals: string[];
     }
   | {
@@ -71,7 +66,7 @@ export type StoryVisual =
       kind: "procurement-email";
       sender: string;
       subject: string;
-      questions: number;
+      status: string;
     }
   | {
       kind: "answers-found";
@@ -194,6 +189,7 @@ export type Artifact =
       paperTitle: string;
       from: string;
       marks: { text: string; note: string; take: boolean }[];
+      sources: { label: string; url: string }[];
       reply: { to: string; subject: string; body: string };
     }
   | {
@@ -254,7 +250,6 @@ export type Quote = {
   name: string;
   handle: string;
   date: string;
-  avatar: string;
   quote: string;
   source: string;
 };
