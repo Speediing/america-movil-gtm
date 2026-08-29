@@ -133,6 +133,10 @@ const forbidden = [
     pattern: new RegExp(phrase("where", "-cursor-fits"), "i"),
   },
   {
+    label: "legacy recorded media",
+    pattern: new RegExp(phrase("krista", "-clips"), "i"),
+  },
+  {
     label: "legacy watercolor asset",
     pattern: new RegExp(
       `${phrase("water", "color")}-(?:${["pad", "orbit", "room", "deal", "attach"].join("|")})`,
@@ -288,12 +292,16 @@ for (const asset of readdirSync(join(root, "public/brand"))) {
   }
 }
 for (const path of [
-  "private/media/krista-clips",
+  phrase("private/media/krista", "-clips"),
   "public/avatars",
-  "public/media/krista-clips",
-  "public/media/where-cursor-fits.jpg",
+  phrase("public/media/krista", "-clips"),
+  phrase("public/media/where", "-cursor-fits.jpg"),
 ]) {
-  if (existsSync(join(root, path))) {
+  const absolute = join(root, path);
+  const hasLegacyMedia =
+    existsSync(absolute) &&
+    (extname(path) !== "" || readdirSync(absolute).length > 0);
+  if (hasLegacyMedia) {
     fail(`Legacy template media must be removed: ${path}`);
   }
 }
