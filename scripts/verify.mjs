@@ -287,6 +287,16 @@ for (const asset of readdirSync(join(root, "public/brand"))) {
     fail(`Unexpected brand asset: ${asset}`);
   }
 }
+for (const path of [
+  "private/media/krista-clips",
+  "public/avatars",
+  "public/media/krista-clips",
+  "public/media/where-cursor-fits.jpg",
+]) {
+  if (existsSync(join(root, path))) {
+    fail(`Legacy template media must be removed: ${path}`);
+  }
+}
 
 const envExample = read(".env.example");
 const passwordMatch = envExample.match(/^SITE_PASSWORD=(.+)$/m);
