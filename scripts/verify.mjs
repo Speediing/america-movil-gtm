@@ -225,6 +225,16 @@ requireFile("src/lib/hero-telemetry.wgsl");
 requireFile("src/lib/startHeroTelemetry.ts");
 requireFile("public/brand/america-movil-watercolor.jpg");
 
+const allowedBrandAssets = new Set([
+  "america-movil-watercolor.jpg",
+  "spacexai.svg",
+]);
+for (const asset of readdirSync(join(root, "public/brand"))) {
+  if (!allowedBrandAssets.has(asset)) {
+    fail(`Unexpected brand asset: ${asset}`);
+  }
+}
+
 const envExample = read(".env.example");
 const passwordMatch = envExample.match(/^SITE_PASSWORD=(.+)$/m);
 if (!passwordMatch?.[1]) {

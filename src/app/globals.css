@@ -5720,11 +5720,15 @@ button:active:not(:focus-visible),
 
 @media (max-width: 640px) {
   .nav-brand {
-    display: none;
+    display: flex;
   }
 
   .site-header {
-    justify-content: flex-end;
+    justify-content: flex-start;
+  }
+
+  .header-actions {
+    display: none;
   }
 
   .hero h1,
