@@ -172,6 +172,8 @@ const layoutSource = read("src/app/layout.tsx");
 const authSource = read("src/lib/auth.ts");
 const brandSource = read("src/data/brand.ts");
 const brandLockup = read("src/components/BrandLockup.tsx");
+const heroDemoSource = read("src/components/HeroDemo.tsx");
+const heroJobsSource = read("src/data/hero-jobs.ts");
 const jobSectionSource = read("src/components/JobSection.tsx");
 const globalsSource = read("src/app/globals.css");
 
@@ -210,6 +212,55 @@ requireIncludes(
   'url("/brand/america-movil-watercolor.jpg")',
   "login watercolor wash",
 );
+requireIncludes(pageSource, "<HeroDemo />", "HeroDemo page integration");
+requireIncludes(pageSource, "<HeroTelemetry />", "hero telemetry integration");
+requireIncludes(
+  heroDemoSource,
+  'from "@/data/hero-jobs"',
+  "HeroDemo job registry",
+);
+requireIncludes(heroDemoSource, 'className="hero"', "HeroDemo hero section");
+requireIncludes(heroDemoSource, 'className="eyebrow"', "HeroDemo eyebrow");
+requireIncludes(heroDemoSource, "<h1>", "HeroDemo heading");
+requireIncludes(heroDemoSource, 'className="hero-intro"', "HeroDemo intro");
+for (const selector of [
+  ".hero-phone-jobs {",
+  ".hero-bot-demo {",
+  ".hero-phone {",
+]) {
+  requireIncludes(globalsSource, selector, `${selector.slice(1, -2)} CSS`);
+}
+if (!/<HeroTelemetry\s*\/>\s*<HeroDemo\s*\/>/.test(pageSource)) {
+  fail("HeroTelemetry must stay directly behind HeroDemo");
+}
+if (
+  pageSource.includes('className="hero"') ||
+  pageSource.includes('className="eyebrow"') ||
+  pageSource.includes('className="hero-phone-jobs"')
+) {
+  fail("HeroDemo must own the entire hero section");
+}
+const heroClassStructure = [
+  'className="hero"',
+  'className="hero-copy"',
+  'className="hero-phone-jobs"',
+  'className="hero-bot-demo"',
+  'className="hero-phone"',
+  'className="hero-phone-notch"',
+  'className="hero-phone-header"',
+  'className="hero-phone-thread"',
+  'className="hero-phone-composer"',
+];
+let previousHeroClassIndex = -1;
+for (const className of heroClassStructure) {
+  const index = heroDemoSource.indexOf(className);
+  if (index < 0) {
+    fail(`Missing HeroDemo structure: ${className}`);
+  } else if (index <= previousHeroClassIndex) {
+    fail(`HeroDemo structure is out of order: ${className}`);
+  }
+  previousHeroClassIndex = index;
+}
 if (
   (pageSource.match(/\/brand\/america-movil-watercolor\.jpg/g) || []).length < 2
 ) {
@@ -223,6 +274,8 @@ requireIncludes(brandSource, 'project: "america-movil-gtm"', "project identity")
 requireFile("src");
 requireFile("src/lib/hero-telemetry.wgsl");
 requireFile("src/lib/startHeroTelemetry.ts");
+requireFile("src/components/HeroDemo.tsx");
+requireFile("src/data/hero-jobs.ts");
 requireFile("public/brand/america-movil-watercolor.jpg");
 
 const allowedBrandAssets = new Set([
@@ -371,6 +424,18 @@ function topLevelObjects(arraySource) {
     index = end + 1;
   }
   return objects;
+}
+
+const heroJobsMarker = heroJobsSource.indexOf("export const HERO_JOBS");
+const heroJobsOpen = heroJobsSource.indexOf("[", heroJobsMarker);
+const heroJobsClose = closingIndex(heroJobsSource, heroJobsOpen, "[", "]");
+if (heroJobsMarker < 0 || heroJobsOpen < 0 || heroJobsClose < 0) {
+  fail("Could not parse HERO_JOBS");
+} else if (
+  topLevelObjects(heroJobsSource.slice(heroJobsOpen + 1, heroJobsClose)).length !==
+  8
+) {
+  fail("HERO_JOBS must contain exactly eight jobs");
 }
 
 const jobsSource = read("src/data/jobs.ts");
